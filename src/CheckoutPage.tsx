@@ -1,8 +1,8 @@
 import {loadTossPayments, ANONYMOUS, TossPaymentsWidgets} from "@tosspayments/tosspayments-sdk";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
-const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
-const customerKey = "V4nvP_veKcNVQPJ6s_1WG";
+const clientKey: string | undefined = `${process.env.REACT_APP_CLIENT_KEY}`
+const customerKey: string | undefined = `${process.env.REACt_APP_CUSTOMER_KEY}`
 
 const CheckoutPage = () => {
     const [amount, setAmount] = useState({
@@ -15,15 +15,17 @@ const CheckoutPage = () => {
     useEffect(() => {
         async function fetchPaymentWidgets() {
             // ------  결제위젯 초기화 ------
-            const tossPayments = await loadTossPayments(clientKey);
-            // 회원 결제
-            const widgets = tossPayments.widgets({
-                customerKey,
-            });
-            // 비회원 결제
-            // const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
+            if (clientKey && customerKey) {
+                const tossPayments = await loadTossPayments(clientKey);
+                // 회원 결제
+                const widgets = tossPayments.widgets({
+                    customerKey,
+                });
+                // 비회원 결제
+                // const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
 
-            setWidgets(widgets);
+                setWidgets(widgets);
+            }
         }
 
         fetchPaymentWidgets();
@@ -96,9 +98,9 @@ const CheckoutPage = () => {
         <div className="wrapper">
             <div className="box_section">
                 {/* 결제 UI */}
-                <div id="payment-method" />
+                <div id="payment-method"/>
                 {/* 이용약관 UI */}
-                <div id="agreement" />
+                <div id="agreement"/>
                 {/* 쿠폰 체크박스 */}
                 <div>
                     <div>
