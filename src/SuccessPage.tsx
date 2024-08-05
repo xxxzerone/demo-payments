@@ -13,14 +13,17 @@ const SuccessPage = () => {
                 amount: searchParams.get("amount"),
                 paymentKey: searchParams.get("paymentKey"),
             };
+            console.log(requestData)
 
-            const response = await fetch("/api/confirm/widget", {
+            const response = await fetch("http://localhost:8080/confirm", {
                 method: "POST",
+                credentials: "same-origin",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(requestData),
             });
+            console.log(response)
 
             const json = await response.json();
             console.log(json);

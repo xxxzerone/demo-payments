@@ -1,4 +1,4 @@
-import {loadTossPayments, ANONYMOUS, TossPaymentsWidgets} from "@tosspayments/tosspayments-sdk";
+import {loadTossPayments, TossPaymentsWidgets} from "@tosspayments/tosspayments-sdk";
 import React, {useEffect, useState} from "react";
 
 const clientKey: string | undefined = `${process.env.REACT_APP_CLIENT_KEY}`
@@ -7,7 +7,7 @@ const customerKey: string | undefined = `${process.env.REACt_APP_CUSTOMER_KEY}`
 const CheckoutPage = () => {
     const [amount, setAmount] = useState({
         currency: "KRW",
-        value: 50_000,
+        value: 10_000,
     });
     const [ready, setReady] = useState(false);
     const [widgets, setWidgets] = useState<TossPaymentsWidgets | null>(null);
